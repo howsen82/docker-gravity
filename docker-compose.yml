@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  gravity:
+    container_name: gravity
+    image: ghcr.io/beryju/gravity:stable
+    hostname: gravity
+    network_mode: host
+    volumes:
+      - /data/gravity:/data:rw
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: "15m"
+        max-file: "5"
+
+volumes:
+  data:
+    driver: local
+
+# http://127.0.0.1:8088/
+# Login using admin
+# docker logs gravity | grep Password: to get the password
+# Go to Discovery -> Subnets
+# Checked the default instance and Action start for it
